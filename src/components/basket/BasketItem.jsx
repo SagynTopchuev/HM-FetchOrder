@@ -6,8 +6,7 @@ import { ReactComponent as MinesIcon } from "../../assets/icons/btnMines.svg";
 import { CartContext } from "../../store/cart-context";
 
 export const BasketItem = ({ title, price, amount, id }) => {
-  const { incrementAmount, decrementAmount } =
-    useContext(CartContext);
+  const { incrementAmount, decrementAmount, DELETE } = useContext(CartContext);
 
   return (
     <Container>
@@ -22,14 +21,21 @@ export const BasketItem = ({ title, price, amount, id }) => {
             variant="outLine"
             borderRadius="squared"
             icon={<MinesIcon />}
-            onClick={()=>decrementAmount(id)}
-          ></Button>
+            onClick={() => decrementAmount(id, amount - 1)}
+          />
           <Button
             variant="outLine"
             borderRadius="squared"
             icon={<PlusIcon />}
-            onClick={()=> incrementAmount(id)}
-          ></Button>
+            onClick={() => incrementAmount(id, amount)}
+          />
+          <Button
+            variant="outLine"
+            borderRadius="squared"
+            onClick={() => DELETE(id)}
+          >
+            🗑 Удалить все
+          </Button>
         </ButtonBlock>
       </Content>
     </Container>
@@ -40,9 +46,11 @@ const Container = styled.div`
   width: 100%;
   padding: 20px 0;
   border-bottom: 2px solid #d6d6d6;
+
   h4 {
     font-size: 20px;
     font-weight: 600;
+
     margin-bottom: 12px;
   }
 `;

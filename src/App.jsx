@@ -7,6 +7,8 @@ import CardProvider from "./store/cart-context";
 
 function App() {
   const [toggle, setToggle] = useState(false);
+  
+  console.log("App");
 
   const toggleHandler = () => {
     setToggle((prev) => !prev);

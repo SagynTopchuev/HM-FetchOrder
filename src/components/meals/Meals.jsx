@@ -1,21 +1,42 @@
-import React from "react";
-import { product } from "../utils/constants";
+import React, { useEffect, useState } from "react";
+// import { product } from "../utils/constants";
 import styled from "styled-components";
 import { MealSummaryCard } from "./MealSummaryCard";
 import { MealItem } from "./MealItem";
+import { fetchRequest } from "../lib/fetApi";
+import { useSortData } from "../../hooks/sort";
+import { Button } from "../UI/Button";
 
-export const Meals = () => {
+export const Meals = React.memo(() => {
+  console.log("MEALS");
+  const [meals, setMeals] = useState();
+  const { sortData, sort } = useSortData(meals);
+
+  async function getFoods() {
+    console.log("Meals Fethc");
+    const response = await fetchRequest("/foods");
+    setMeals(response);
+  }
+
+  useEffect(() => {
+    getFoods();
+  }, []);
   return (
     <>
       <MealSummaryCard />
       <Container>
-        {product.map((meal) => (
-          <MealItem key={meal.id} meal={meal} />
+        <div style={{ display: "flex" }}>
+          <Button onClick={() => sort("ASC")}>ASC</Button>
+          <Button onClick={() => sort("DESC")}>DESC</Button>
+        </div>
+
+        {sortData?.map((meal) => (
+          <MealItem key={meal._id} meal={meal} />
         ))}
       </Container>
     </>
   );
-};
+});
 
 const Container = styled.div`
   background-color: #fff;

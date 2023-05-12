@@ -57,5 +57,7 @@ const MyButton = styled.button`
   svg {
     fill: ${getColor};
     stroke: ${getColor};
+    width: 10px;
+    height: 10px;
   }
 `;

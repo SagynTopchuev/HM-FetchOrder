@@ -50,7 +50,6 @@ const Container = styled.div`
     font-size: 16px;
     line-height: 24px;
     text-align: center;
-    padding: 0 40px;
     color: #ffffff;
   }
 `;

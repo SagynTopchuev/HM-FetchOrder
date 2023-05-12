@@ -7,22 +7,22 @@ import styled from "styled-components";
 import { CartContext } from "../../store/cart-context";
 
 export const Basket = ({ onToggle }) => {
-  const { cartItems, getTotalAmount } = useContext(CartContext);
+  const { basket, getTotalAmount } = useContext(CartContext);
 
   return (
     <Modal onClose={onToggle}>
       <Content>
-        {cartItems.length ? (
+        {basket?.length ? (
           <FixedWidthContainer>
-            {cartItems.map((item) => {
+            {basket.map((item) => {
               if (item.amount > 0) {
                 return (
                   <BasketItem
                     title={item.title}
                     price={item.price}
                     amount={item.amount}
-                    id={item.id}
-                    key={item.id}
+                    id={item._id}
+                    key={item._id}
                   />
                 );
               }
@@ -31,7 +31,7 @@ export const Basket = ({ onToggle }) => {
           </FixedWidthContainer>
         ) : null}
 
-        <TotalAmount totalPrice={getTotalAmount()} onClose={onToggle} />
+        <TotalAmount totalPrice={getTotalAmount} onClose={onToggle} />
       </Content>
     </Modal>
   );

@@ -16,7 +16,7 @@ export const OrderBucket = ({ children, onToggle }) => {
     return () => {
       clearTimeout(id);
     };
-  }, [context.addItem]);
+  }, [context.addItemToCartHandler]);
 
   return (
     <Button className={animationClass} onClick={onToggle}>
@@ -30,22 +30,29 @@ export const OrderBucket = ({ children, onToggle }) => {
 const Button = styled.button`
   width: 249px;
   height: 59px;
+
   background: #5a1f08;
+
   border-radius: 30px;
+  border: none;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
   cursor: pointer;
+
   &:hover {
     background-color: #4d1601;
   }
+
   &:active {
     background-color: #993108;
   }
+
   &.bump {
     animation: bump 300ms ease-out;
   }
+
   @keyframes bump {
     0% {
       transform: scale(1);
@@ -67,6 +74,7 @@ const Button = styled.button`
 const OrsedBucketTitle = styled.span`
   font-weight: 600;
   font-size: 16px;
+
   line-height: 24px;
   color: #ffffff;
   margin: 0 24px 0 13px;
@@ -75,6 +83,7 @@ const OrsedBucketTitle = styled.span`
 const OrderBucketCount = styled.span`
   background: #8a2b06;
   border-radius: 30px;
+
   padding: 4px 13px;
   color: #fff;
 `;
